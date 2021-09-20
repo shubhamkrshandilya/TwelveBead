@@ -10,31 +10,35 @@ void setup(){
 void draw(){
   background(81);
   stroke(201);
-  strokeWeight(6);
+  strokeWeight(4);
   board.show();
+  //noLoop();
 }
 
 
 
 void mousePressed() {
-  if(overBox) { 
-    locked = true; 
-    fill(255, 255, 255);
-  } else {
-    locked = false;
+  Peg p = null;
+  for(Peg peg : board.whitePegs){
+    p = peg.clicked(mouseX, mouseY);
   }
-  xOffset = mouseX-bx; 
-  yOffset = mouseY-by; 
-
-}
-
-void mouseDragged() {
-  if(locked) {
-    bx = mouseX-xOffset; 
-    by = mouseY-yOffset; 
+  
+  for(Peg peg : board.blackPegs){
+    p = peg.clicked(mouseX, mouseY);
   }
+  if(p != null){
+    p.show();
+  }
+
 }
 
-void mouseReleased() {
-  locked = false;
-}
+//void mouseDragged() {
+//  if(locked) {
+//    bx = mouseX-xOffset; 
+//    by = mouseY-yOffset; 
+//  }
+//}
+
+//void mouseReleased() {
+//  locked = false;
+//}
