@@ -9,7 +9,7 @@ class Board {
     this.whitePegs = new ArrayList<Peg>();
     this.blackPegs = new ArrayList<Peg>();
     this.setBlocks();
-    this.printBlocks();
+    //this.printBlocks();
     this.setPegs();
   }
 
@@ -43,6 +43,18 @@ class Board {
     for(Peg peg: this.blackPegs){
       peg.show();
     }
+  }
+  
+  PVector findNear(float px, float py){
+    PVector nearPoint = null;
+    for(PVector loc: this.blocks){
+      float dist = dist(loc.x, loc.y, px, py);
+      if(dist < 40){
+        nearPoint = loc;
+      }
+    }
+    //print(nearPoint);
+    return nearPoint;
   }
   void show() {
     drawVertical();
