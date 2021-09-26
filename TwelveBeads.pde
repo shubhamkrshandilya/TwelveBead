@@ -16,44 +16,50 @@ void draw(){
   //noLoop();
 }
 
-
-
-void mousePressed() {
-  Peg p = null;
-  for(Peg peg : board.whitePegs){
-    if(peg.clicked(mouseX, mouseY) != null){
-       p = peg.clicked(mouseX, mouseY);
-    }
-  }
-  
-  for(Peg peg : board.blackPegs){
-    if(peg.clicked(mouseX, mouseY) != null){
-       p = peg.clicked(mouseX, mouseY);
-    }
-  }
-  if(p != null){
-    p.show();
-   
-    if(!p.selected){
-      p.makeSelect();
-      prev = p;
-    }
-    
-    //p.to_string();
-  }else{
-    if(prev != null){
-      if(prev.selected){
-        PVector nearPoint = board.findNear(mouseX, mouseY);
-        //print(nearPoint);
-        if(nearPoint != null){
-          prev.move(nearPoint.x, nearPoint.y);
-        }
-        prev.disableSelect();
-      }
-    }
-  }
-
+void mousePressed(){
+  board.onMousePressed();
 }
+
+//void mousePressed() {
+//  Peg p = null;
+//  for(Peg peg : board.whitePegs){
+//    if(peg.clicked(mouseX, mouseY) != null){
+//       p = peg.clicked(mouseX, mouseY);
+//    }
+//  }
+  
+//  for(Peg peg : board.blackPegs){
+//    if(peg.clicked(mouseX, mouseY) != null){
+//       p = peg.clicked(mouseX, mouseY);
+//    }
+//  }
+//  if(p != null){
+//    p.show();
+//    if(prev == null){
+//      if(!p.selected){
+//        p.makeSelect();
+//        prev = p;
+//      }
+//    }
+//    else if(prev == p){
+//      p.disableSelect();
+//      prev = null;
+//    }
+//  }else{
+//    if(prev != null){
+//      if(prev.selected){
+//        PVector nearPoint = board.findNear(mouseX, mouseY);
+//        //print(nearPoint);
+//        if(nearPoint != null){
+//          prev.move(nearPoint.x, nearPoint.y);
+//        }
+//        prev.disableSelect();
+//        prev = null;
+//      }
+//    }
+//  }
+
+//}
 
 //void mouseDragged() {
 //  if(locked) {

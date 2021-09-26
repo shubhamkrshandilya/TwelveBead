@@ -3,11 +3,15 @@ class Board {
   PVector[] blocks;
   ArrayList<Peg> whitePegs;
   ArrayList<Peg> blackPegs;
+  Peg prev;
+  boolean currMove; //true for white false for black
   public Board(int size) {
     this.size = size;
     this.blocks = new PVector[25];
     this.whitePegs = new ArrayList<Peg>();
     this.blackPegs = new ArrayList<Peg>();
+    this.prev = null;
+    currMove = true;
     this.setBlocks();
     //this.printBlocks();
     this.setPegs();
@@ -88,5 +92,49 @@ class Board {
     line((width + this.size)/2, (height)/2, (width)/2, (height - this.size)/2);
     line((width)/2, (height + this.size)/2, (width + this.size)/2, (height)/2);
     line((width)/2, (height - this.size)/2, (width - this.size)/2, (height)/2);
+  }
+  
+  void onMousePressed() {
+    Peg p = null;
+    if(currMove){
+      for(Peg peg : this.whitePegs){
+        if(peg.clicked(mouseX, mouseY) != null){
+           p = peg.clicked(mouseX, mouseY);
+        }
+      }
+    }
+    else{
+      for(Peg peg : this.blackPegs){
+        if(peg.clicked(mouseX, mouseY) != null){
+           p = peg.clicked(mouseX, mouseY);
+        }
+      }
+    }
+    if(p != null){
+      p.show();
+      if(this.prev == null){
+        if(!p.selected){
+          p.makeSelect();
+          this.prev = p;
+        }
+      }
+      else if(this.prev == p){
+        p.disableSelect();
+        this.prev = null;
+      }
+    }else{
+      if(this.prev != null){
+        if(this.prev.selected){
+          PVector nearPoint = this.findNear(mouseX, mouseY);
+          //print(nearPoint);
+          if(nearPoint != null){
+            prev.move(nearPoint.x, nearPoint.y);
+          }
+          this.prev.disableSelect();
+          this.prev = null;
+          this.currMove = !this.currMove;
+        }
+      }
+    }
   }
 }
