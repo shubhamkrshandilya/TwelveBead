@@ -1,8 +1,11 @@
 Board board;
 boolean locked;
+int offset;
 Peg prev;
 void setup(){
   size(800, 600);
+   //fullScreen();
+   offset = 40;
   board = new Board(500);
   locked = false;
   prev = null;

@@ -52,6 +52,10 @@ class Peg{
    this.y = py;
  }
  
+ boolean validMove(ArrayList<Peg> pegs){
+   
+   return false;
+ }
  
  public void to_string(){
    println("X: " + this.x + " Y: " + this.y);
