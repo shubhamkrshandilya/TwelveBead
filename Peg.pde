@@ -16,7 +16,8 @@ class Peg{
  
  void show(){
    //noStroke();
-   fill(255);
+   //fill(255);
+   fill(231);
    if(!this.piece){
      fill(11);
    }
